@@ -102,16 +102,8 @@ Project 2 Collect App Phase 1/
 - Error handling for network issues and missing data
 - Clean, maintainable code structure
 
-## Future Enhancements
-
-- Pagination for large result sets
-- Favorite Pokemon functionality
-- Advanced filtering options
-- Comparison tools
-- Offline caching
-
 ## Credits
 
 - **API**: PokeAPI (https://pokeapi.co/)
 - **Images**: Pokemon sprites from PokeAPI
-- **Development**: CPSC-3750 Collection App Project
+- **Development**: CPSC-3750 Collection App Project By Sean Farrell

@@ -101,7 +101,8 @@ audiochanger.html is the main file that is run in the browser. It contains the c
     }
     
     .segment-button {
-        background-color: #10aa36;
+        background-color: #0b4b1b;
+        font-size: small;
         text-align: left;
         padding: 12px;
         border-radius: 5px;
@@ -137,6 +138,202 @@ audiochanger.html is the main file that is run in the browser. It contains the c
     .edit-controls button:hover {
         background-color: #6f5591;
     }
+    h2 {
+        text-align: center;
+        color: #61dafb;
+    }
+
+    .playlist {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 20px auto;
+        max-width: 1200px;
+        justify-content: center;
+    }
+
+    /* Segment form styling */
+    .segment-form {
+        background-color: #2a2a2a;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .segment-form.active {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #61dafb;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #414a50;
+        border-radius: 5px;
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        font-size: 1em;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #61dafb;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .form-buttons button {
+        background-color: #5d4777;
+    }
+
+    .form-buttons button:hover {
+        background-color: #6f5591;
+    }
+
+    .form-buttons .cancel-btn {
+        background-color: #a83a32;
+    }
+
+    .form-buttons .cancel-btn:hover {
+        background-color: #bf4940;
+    }
+    .timeline-container {
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #timeline {
+        flex: 1;
+        height: 6px;
+        background: #444;
+        border-radius: 3px;
+        outline: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+    #timeline::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #61dafb;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    #timeline::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: #61dafb;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+
+    #time-display {
+        color: #e0e0e0;
+        font-size: 14px;
+        min-width: 100px;
+    }
+    /* Timestamp shortcut button styling */
+    .add-timestamp-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-timestamp-btn:hover {
+        background-color: #218838;
+    }
+
+    .remove-timestamp-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .remove-timestamp-btn:hover {
+        background-color: #c82333;
+    }
+
+    /* Optional: Active state styling */
+    .add-timestamp-btn:active {
+        background-color: #1e7e34;
+        transform: translateY(1px);
+    }
+
+    .remove-timestamp-btn:active {
+        background-color: #bd2130;
+        transform: translateY(1px);
+    }
+    .documentation-section {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .documentation-section h2 {
+        color: #61dafb;
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #414a50;
+        padding-bottom: 10px;
+    }
+
+    .doc-section {
+        margin-bottom: 20px;
+    }
+
+    .doc-section h3 {
+        color: #e0e0e0;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+
+    .doc-section ol, .doc-section ul {
+        margin-left: 20px;
+        line-height: 1.6;
+    }
+
+    .doc-section li {
+        margin-bottom: 8px;
+    }
+
+    .doc-section strong {
+        color: #61dafb;
+    }
 </style>
 </head>
 <body>
@@ -169,17 +366,77 @@ audiochanger.html is the main file that is run in the browser. It contains the c
         </div>
         
         <div class="edit-controls">
-            <button id="add-segment-btn" title="Add segment at current time">➕ Add Segment</button>
-            <button id="remove-segment-btn" title="Remove current segment">❌ Remove Segment</button>
+            
+
+            <button  class="add-timestamp-btn" id="add-segment-btn" title="Add segment at current time">➕ Add Timestamp Shortcut</button>
+            <button class="remove-timestamp-btn" id="remove-segment-btn" title="Remove current segment">❌ Remove Timestamp Shortcut</button>
+
+        </div>
+        <div class="timeline-container">
+            <input type="range" id="timeline" min="0" max="100" value="0">
+            <span id="time-display">0:00 / 0:00</span>
+        </div>
+
+    </div>
+
+    <!-- Segment form -->
+    <div id="segment-form" class="segment-form">
+        <h3 style="color: #61dafb; text-align: center; margin-top: 0;">Add New Timestamp Shortcut</h3>
+        <div class="form-group">
+            <label for="segment-title">Segment Title:</label>
+            <input type="text" id="segment-title" placeholder="Enter segment title...">
+        </div>
+        <div class="form-buttons">
+            <button id="save-segment-btn">💾 Save Segment</button>
+            <button id="cancel-segment-btn" class="cancel-btn">❌ Cancel</button>
         </div>
     </div>
     
-    <h2>Segments</h2>
+    <h2>Time Stamp Shortcuts</h2>
     
     <!-- Div for the pre-made and user created segments will be located here -->
     <div id="playlist" class="playlist">
     </div>
 
+    <!-- Documentation section for how to use the audio player -->
+    <div class="documentation-section">
+        <h2>How to Use the Audio Player</h2>
+        
+        <div class="doc-section">
+            <h3>Getting Started</h3>
+            <ol>
+                <li><strong>Description </strong>This is an audio player website that a user can listen to a couple of Kevin MacLeod songs.</li>
+
+            </ol>
+        </div>
+    
+        <div class="doc-section">
+            <h3>Audio Controls</h3>
+            <ul>
+                <li><strong>Play/Pause:</strong> Click the play button to start playback, click again to pause</li>
+                <li><strong>Timeline:</strong> Use the timeline bar to seek to specific positions in the audio</li>
+                <li><strong>Time Display:</strong> Shows current playback time and total duration</li>
+            </ul>
+        </div>
+    
+        <div class="doc-section">
+            <h3>Timestamp Shortcuts</h3>
+            <ul>
+                <li><strong>Add Timestamp:</strong> Click "Add Timestamp Shortcut" while audio is playing to create a bookmark at the current time</li>
+                <li><strong>Use Shortcuts:</strong> Click any timestamp button in the segment section to jump directly to that time</li>
+                <li><strong>Remove Shortcuts:</strong> Select a timestamp and click "Remove Timestamp Shortcut" to delete it</li>
+            </ul>
+        </div>
+    
+        <div class="doc-section">
+            <h3>Tips</h3>
+            <ul>
+                <li>Timestamps are perfect for marking important sections, chapters, or study points</li>
+                <li>Use descriptive names when creating timestamps for better organization</li>
+                <li>The timeline bar allows precise seeking - click anywhere to jump to that position</li>
+            </ul>
+        </div>
+    </div>
     <!-- Include the JavaScript code for functionality of the adio player-->
     <script>
         
@@ -202,6 +459,12 @@ audiochanger.html is the main file that is run in the browser. It contains the c
             const addSegmentBtn = document.getElementById('add-segment-btn');
             const removeSegmentBtn = document.getElementById('remove-segment-btn');
             
+            // Form elements
+            const segmentForm = document.getElementById('segment-form');
+            const segmentTitleInput = document.getElementById('segment-title');
+            const saveSegmentBtn = document.getElementById('save-segment-btn');
+            const cancelSegmentBtn = document.getElementById('cancel-segment-btn');
+            
             // Set audio source - you would need to replace this with your actual audio file
             const audioFile = 'Kevin MacLeod.mp3'; // Replace with your audio file
             audioPlayer.src = audioFile;
@@ -219,6 +482,7 @@ audiochanger.html is the main file that is run in the browser. It contains the c
             
             let currentSegment = null;
             let isSegmentPlaying = false;
+            let pendingSegmentTime = null; // Store the time when adding a segment
             
             // Initialize the player
             audioPlayer.addEventListener('loadedmetadata', function() {
@@ -255,12 +519,29 @@ audiochanger.html is the main file that is run in the browser. It contains the c
             
             // Add segment button
             addSegmentBtn.addEventListener('click', function() {
-                addNewSegment();
+                showSegmentForm();
+            });
+            
+            // Save segment button
+            saveSegmentBtn.addEventListener('click', function() {
+                saveNewSegment();
+            });
+            
+            // Cancel segment button
+            cancelSegmentBtn.addEventListener('click', function() {
+                hideSegmentForm();
             });
             
             // Remove segment button
             removeSegmentBtn.addEventListener('click', function() {
                 removeCurrentSegment();
+            });
+
+            // Handle Enter key in segment title input
+            segmentTitleInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    saveNewSegment();
+                }
             });
             
             // Listen for when the audio naturally ends
@@ -356,14 +637,33 @@ audiochanger.html is the main file that is run in the browser. It contains the c
                 playlistElement.appendChild(button);
                 });
             }
+
+            // Show segment form
+            function showSegmentForm() {
+                pendingSegmentTime = audioPlayer.currentTime;
+                segmentForm.classList.add('active');
+                segmentTitleInput.value = '';
+                segmentTitleInput.focus();
+            }
+
+            // Hide segment form
+            function hideSegmentForm() {
+                segmentForm.classList.remove('active');
+                pendingSegmentTime = null;
+                segmentTitleInput.value = '';
+            }
                 
-            // Add a new segment at current time
-            function addNewSegment() {
-                const currentTime = audioPlayer.currentTime;
-                const title = prompt("Enter a title for this segment:");
+            // Save new segment
+            function saveNewSegment() {
+                const title = segmentTitleInput.value.trim();
                 
                 // If no title is provided, do not add the segment
-                if (!title) return; 
+                if (!title) {
+                    alert("Please enter a title for the segment.");
+                    return;
+                }
+                
+                const currentTime = pendingSegmentTime;
                 
                 // Find the correct position to insert the new segment
                 let insertIndex = 0;
@@ -399,6 +699,9 @@ audiochanger.html is the main file that is run in the browser. It contains the c
                 
                 // Set as current segment
                 currentSegment = newSegment;
+                
+                // Hide the form
+                hideSegmentForm();
             }
             
             // Remove current segment
@@ -429,7 +732,59 @@ audiochanger.html is the main file that is run in the browser. It contains the c
             
             // Initial render
             renderPlaylist();
+        
         });
+
+        // Timeline synchronization functionality
+        function initializeTimeline() {
+            const audio = document.getElementById('audio-player'); // Adjust ID as needed
+            const timeline = document.getElementById('timeline'); // Adjust ID as needed
+            const timeDisplay = document.getElementById('time-display'); // Adjust ID as needed
+            
+            // Update timeline position during playback
+            audio.addEventListener('timeupdate', function() {
+                if (audio.duration) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    timeline.value = progress;
+                    updateTimeDisplay();
+                }
+            });
+            
+            // Handle user clicking/dragging timeline
+            timeline.addEventListener('input', function() {
+                if (audio.duration) {
+                    const newTime = (timeline.value / 100) * audio.duration;
+                    audio.currentTime = newTime;
+                }
+            });
+            
+            // Update duration when audio loads
+            audio.addEventListener('loadedmetadata', function() {
+                timeline.max = 100;
+                timeline.value = 0;
+                updateTimeDisplay();
+            });
+            
+            // Format and display current time
+            function updateTimeDisplay() {
+                const current = formatTime(audio.currentTime);
+                const duration = formatTime(audio.duration || 0);
+                if (timeDisplay) {
+                    timeDisplay.textContent = `${current} / ${duration}`;
+                }
+            }
+            
+            // Helper function to format time
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeTimeline);
     </script>
 </body>
-</html>
+
+
